@@ -1,6 +1,7 @@
 // Admin Income Dashboard with filters.
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../services/api';
 import '../styles/admin.css';
 
 function AdminIncome() {
@@ -22,8 +23,8 @@ function AdminIncome() {
   const loadData = async () => {
     try {
       const [statsData, paymentsData] = await Promise.all([
-        fetch(`http://localhost:5000/api/payments/income/${filter}`).then(r => r.json()),
-        fetch('http://localhost:5000/api/payments').then(r => r.json())
+        fetch(`${BASE_URL}/payments/income/${filter}`).then(r => r.json()),
+        fetch(`${BASE_URL}/payments`).then(r => r.json())
       ]);
       setStats(statsData);
       setPayments(paymentsData);

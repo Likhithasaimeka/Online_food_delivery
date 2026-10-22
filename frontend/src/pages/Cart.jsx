@@ -1,7 +1,7 @@
 // Import hooks and API calls.
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createOrder } from '../services/api';
+import { createOrder, BASE_URL } from '../services/api';
 import '../styles/pages.css';
 import '../styles/cart.css';
 
@@ -29,7 +29,7 @@ function Cart() {
 
   const loadWallet = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/wallet/${userId}`);
+      const response = await fetch(`${BASE_URL}/wallet/${userId}`);
       const data = await response.json();
       setWallet(data);
     } catch (error) {
@@ -107,7 +107,7 @@ function Cart() {
       const orders = await Promise.all(orderPromises);
 
       // Process payment for the total amount using first order ID as reference
-      const paymentResponse = await fetch('http://localhost:5000/api/payments/process', {
+      const paymentResponse = await fetch(`${BASE_URL}/payments/process`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

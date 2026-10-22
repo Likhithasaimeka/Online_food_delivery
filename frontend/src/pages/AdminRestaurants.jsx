@@ -1,6 +1,7 @@
 // Admin restaurant management page.
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../services/api';
 import '../styles/admin.css';
 
 function AdminRestaurants() {
@@ -27,7 +28,7 @@ function AdminRestaurants() {
 
   const loadRestaurants = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/restaurants');
+      const response = await fetch(`${BASE_URL}/restaurants`);
       const data = await response.json();
       setRestaurants(data);
     } catch (error) {
@@ -43,7 +44,7 @@ function AdminRestaurants() {
   const handleCreate = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/restaurants', {
+      const response = await fetch(`${BASE_URL}/restaurants`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -76,7 +77,7 @@ function AdminRestaurants() {
     const imageUrl = prompt('Image URL', restaurant.imageUrl || '') || restaurant.imageUrl;
 
     try {
-      await fetch(`http://localhost:5000/api/restaurants/${restaurant.id}`, {
+      await fetch(`${BASE_URL}/restaurants/${restaurant.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, location, description, rating, deliveryTime, imageUrl })
@@ -93,7 +94,7 @@ function AdminRestaurants() {
   const handleDelete = async (id) => {
     if (!confirm('Delete this restaurant?')) return;
     try {
-      await fetch(`http://localhost:5000/api/restaurants/${id}`, { method: 'DELETE' });
+      await fetch(`${BASE_URL}/restaurants/${id}`, { method: 'DELETE' });
       setRestaurants((prev) => prev.filter((r) => r.id !== id));
       setMessage('Restaurant deleted successfully');
     } catch (error) {

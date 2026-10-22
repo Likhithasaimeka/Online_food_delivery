@@ -1,5 +1,6 @@
 // Set backend base URL in one place.
-const BASE_URL = 'http://localhost:5000/api';
+export const API_ORIGIN = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000' : '');
+export const BASE_URL = `${API_ORIGIN}/api`;
 
 // Generic helper for API calls.
 const request = async (path, options = {}) => {

@@ -12,7 +12,8 @@ import {
   deleteAdminFood,
   getAdminOrders,
   updateAdminOrderStatus,
-  updateAdminDeliveryStatus
+  updateAdminDeliveryStatus,
+  BASE_URL
 } from '../services/api';
 import '../styles/admin.css';
 
@@ -42,7 +43,7 @@ function AdminDashboard() {
           getAdminUsers(),
           getAdminFoods(),
           getAdminOrders(),
-          fetch('http://localhost:5000/api/restaurants').then(r => r.json())
+          fetch(`${BASE_URL}/restaurants`).then(r => r.json())
         ]);
 
         setStats(statsData);

@@ -1,14 +1,14 @@
 // Profile page — displays logged-in user details and full order history.
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserProfile } from '../services/api';
+import { getUserProfile, API_ORIGIN } from '../services/api';
 import OrderTracker from '../components/OrderTracker';
 import '../styles/profile.css';
 
 // Default SVG avatar used when user has no profileImage set.
 const DEFAULT_AVATAR =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='38' r='22' fill='%23888'/%3E%3Cellipse cx='50' cy='96' rx='36' ry='26' fill='%23888'/%3E%3C/svg%3E";
-const ASSET_BASE = 'http://localhost:5000';
+const ASSET_BASE = API_ORIGIN;
 
 function Profile() {
   // profile holds: user fields + orders[] returned by /api/users/profile/:id

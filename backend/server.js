@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 // Load environment variables from .env if present.
 require('dotenv').config();
@@ -20,7 +21,7 @@ const UserController = require('./controllers/userController');
 const RestaurantController = require('./controllers/restaurantController');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Enable CORS so frontend can call backend APIs.
 app.use(cors());
@@ -43,12 +44,24 @@ app.use('/api/wallet', walletRoutes);
 // Search endpoint.
 app.get('/api/search', RestaurantController.searchAll);
 
-// Health check route.
-app.get('/', (request, response) => {
-  response.send('Online Food Delivery Backend is running');
-});
+// Serve static frontend build in production if available
+const frontendDist = path.join(__dirname, '..', 'frontend', 'dist');
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get('*', (request, response, next) => {
+    if (request.path.startsWith('/api') || request.path.startsWith('/uploads')) {
+      return next();
+    }
+    response.sendFile(path.join(frontendDist, 'index.html'));
+  });
+} else {
+  // Health check route.
+  app.get('/', (request, response) => {
+    response.send('Online Food Delivery Backend is running');
+  });
+}
 
 // Start server.
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

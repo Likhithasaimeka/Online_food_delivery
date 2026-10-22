@@ -59,6 +59,34 @@ git push -u origin main
 
 ---
 
+## 🌐 Deploy to Cloud (Free)
+
+### 🥇 Method 1: Render (Recommended — 1-Click Full-Stack)
+Render hosts both your frontend UI and backend API together in a single free service using the included [render.yaml](file:///c:/Users/likhi/online-food-delivery/render.yaml):
+
+1. Go to [render.com](https://dashboard.render.com/) and sign up / log in with your GitHub account.
+2. Click **New +** ➔ **Blueprint** (or **Web Service**).
+3. Connect your repository: `https://github.com/Likhithasaimeka/Online_food_delivery`.
+4. Render will auto-detect `render.yaml` with:
+   - **Build Command**: `npm run build`
+   - **Start Command**: `npm start`
+5. Click **Apply** or **Create Web Service**.
+6. Within 2 minutes, your food delivery app will be live on a public `https://<your-app>.onrender.com` URL!
+
+---
+
+### 🥈 Method 2: Dual Deployment (Vercel Frontend + Render Backend)
+If you prefer hosting the React frontend on **Vercel**:
+1. Deploy Backend on [Render](https://render.com) (Root directory: `backend`, Build: `npm install`, Start: `npm start`).
+2. Deploy Frontend on [Vercel](https://vercel.com):
+   - Import your GitHub repo.
+   - Root directory: `frontend`.
+   - Add Environment Variable:
+     - `VITE_API_URL`: `https://your-backend-app.onrender.com`
+3. Click **Deploy**!
+
+---
+
 ## 🛠️ Summary of Fixes Applied
 
 1. **CSS Build Error Resolved**: Fixed duplicate and unterminated selector blocks in [profile.css](file:///c:/Users/likhi/online-food-delivery/frontend/src/styles/profile.css) that were causing minification warnings during Vite builds.

@@ -1,7 +1,7 @@
 // Import hooks and reusable parts.
 import { useEffect, useState } from 'react';
 import FoodCard from '../components/FoodCard';
-import { getFoods } from '../services/api';
+import { getFoods, BASE_URL } from '../services/api';
 import '../styles/pages.css';
 
 // Home page shows list of food items.
@@ -22,8 +22,8 @@ function Home() {
       try {
         const [foodsData, restaurantsData, locationsData] = await Promise.all([
           getFoods(),
-          fetch('http://localhost:5000/api/restaurants').then(r => r.json()),
-          fetch('http://localhost:5000/api/restaurants/locations/all').then(r => r.json())
+          fetch(`${BASE_URL}/restaurants`).then(r => r.json()),
+          fetch(`${BASE_URL}/restaurants/locations/all`).then(r => r.json())
         ]);
         setFoods(foodsData);
         setRestaurants(restaurantsData);
@@ -41,12 +41,12 @@ function Home() {
   // Fetch filtered restaurants when location changes.
   useEffect(() => {
     if (selectedLocation) {
-      fetch(`http://localhost:5000/api/restaurants?location=${selectedLocation}`)
+      fetch(`${BASE_URL}/restaurants?location=${selectedLocation}`)
         .then(r => r.json())
         .then(data => setRestaurants(data))
         .catch(err => setError(err.message));
     } else {
-      fetch('http://localhost:5000/api/restaurants')
+      fetch(`${BASE_URL}/restaurants`)
         .then(r => r.json())
         .then(data => setRestaurants(data))
         .catch(err => setError(err.message));
@@ -64,8 +64,8 @@ function Home() {
     setIsSearching(true);
     try {
       const url = selectedLocation
-        ? `http://localhost:5000/api/search?q=${encodeURIComponent(searchQuery)}&location=${encodeURIComponent(selectedLocation)}`
-        : `http://localhost:5000/api/search?q=${encodeURIComponent(searchQuery)}`;
+        ? `${BASE_URL}/search?q=${encodeURIComponent(searchQuery)}&location=${encodeURIComponent(selectedLocation)}`
+        : `${BASE_URL}/search?q=${encodeURIComponent(searchQuery)}`;
       const response = await fetch(url);
       const data = await response.json();
       setSearchResults(data);

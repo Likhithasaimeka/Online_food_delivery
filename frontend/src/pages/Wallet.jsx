@@ -1,6 +1,7 @@
 // User Wallet page for managing wallet balance.
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../services/api';
 import '../styles/wallet.css';
 
 function Wallet() {
@@ -26,8 +27,8 @@ function Wallet() {
   const loadWalletData = async (userId) => {
     try {
       const [walletData, paymentsData] = await Promise.all([
-        fetch(`http://localhost:5000/api/wallet/${userId}`).then(r => r.json()),
-        fetch(`http://localhost:5000/api/payments/user/${userId}`).then(r => r.json())
+        fetch(`${BASE_URL}/wallet/${userId}`).then(r => r.json()),
+        fetch(`${BASE_URL}/payments/user/${userId}`).then(r => r.json())
       ]);
       setWallet(walletData);
       setPayments(paymentsData);
@@ -46,7 +47,7 @@ function Wallet() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/wallet/add', {
+      const response = await fetch(`${BASE_URL}/wallet/add`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
