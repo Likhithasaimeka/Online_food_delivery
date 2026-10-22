@@ -2,47 +2,6 @@
 
 A complete full-stack food delivery web application built with **React (Vite)** on the frontend and **Node.js (Express + SQLite3)** on the backend.
 
----
-
-## 🔑 Login Credentials
-
-### 🛡️ Admin Credentials
-Access the Admin Dashboard to manage menu items, restaurant listings, customer orders, live delivery tracking, and view financial earnings reports.
-
-* **Admin Login URL**: [http://localhost:5173/admin/login](http://localhost:5173/admin/login) or via the **Auth** page "Admin Login" tab.
-
-| Credential Type | Email | Password | Role |
-| :--- | :--- | :--- | :--- |
-| **Personal Admin** | `sailikhitha68@gmail.com` | `1234` | Full Admin |
-| **Default System Admin** | `admin@foodapp.com` | `Admin@123` | Full Admin |
-
-> Both credential sets are fully supported and verified!
-
-#### 🛠️ What the Admin Can Do:
-* **Dashboard Overview**: View real-time statistics (total users, total dishes, total orders placed).
-* **Menu Management**: Add new food dishes, edit existing prices/descriptions/images, or delete items.
-* **Order & Delivery Control**: View customer orders and transition statuses (`Pending` ➔ `Preparing` ➔ `Out for Delivery` ➔ `Delivered`).
-* **Restaurant Directory**: Add and configure restaurant branches across locations with ratings and estimated delivery times.
-* **Income Analytics**: Analyze sales earnings with dynamic filters (`Today`, `This Week`, `This Month`, `This Year`, or `All Time`).
-* **User Management**: Inspect registered user accounts and manage access.
-
----
-
-### 👤 Customer User Accounts
-* **User Login URL**: [http://localhost:5173/login](http://localhost:5173/login) or [http://localhost:5173/auth](http://localhost:5173/auth)
-
-| Name | Email | Password | Status |
-| :--- | :--- | :--- | :--- |
-| **likkhi** | `sailikhitha68@gmail.com` | `123456` | Verified |
-| **vidhya** | `srividhyamaganti2103@gmail.com` | `123456` | Verified |
-| **chandhini** | `chandinipothula99@gmail.com` | `123456` | Verified |
-| **srinivas** | `mekasrinivas1978@gmail.com` | `Bapanna2405` | Verified |
-| **Demo User** | `demo@foodapp.com` | `123456` | Verified |
-
-> **New Registrations**: You can also register a new account anytime on the **Register** tab. If your Gmail App Password is not set up, a built-in development fallback will display the 6-digit verification OTP right on your screen and in the server console!
-
----
-
 ## 🚀 How to Run the Application
 
 ### Option 1: One-Click Launch (Windows)
